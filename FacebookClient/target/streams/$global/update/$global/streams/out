@@ -1,4 +1,4 @@
-[0m[[0minfo[0m] [0mUpdating {file:/home/parikshit/Documents/Facebook/FacebookClient/}facebookclient...[0m
+[0m[[0minfo[0m] [0mUpdating {file:/C:/Users/parikshitt23/Desktop/79218564_91507670_project4_part2/Facebook/FacebookClient/}facebookclient...[0m
 [0m[[0mdebug[0m] [0m:: resolving dependencies :: default#facebookclient_2.11;1.0[0m
 [0m[[0mdebug[0m] [0m	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool][0m
 [0m[[0mdebug[0m] [0m	validate = true[0m
@@ -7,7 +7,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.scala-lang#scala-library;2.11.7 [compile->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.11.7 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@19f4746[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2f4a593f[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.11.7[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.11.7 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.11.7] org.scala-lang#scala-library;2.11.7[0m
@@ -276,13 +276,13 @@
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.chuusai#shapeless_2.11;1.2.4 {compile=[compile(*), master(compile)], runtime=[runtime(*)]}[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: com.chuusai#shapeless_2.11;1.2.4[0m
 [0m[[0mdebug[0m] [0m	found com.chuusai#shapeless_2.11;1.2.4 in sbt-chain[0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->master(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)][0m
@@ -399,6 +399,31 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving commons-lang#commons-lang;2.6 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: commons-lang#commons-lang;2.6 {compile=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: commons-lang#commons-lang;2.6[0m
+[0m[[0mdebug[0m] [0m	found commons-lang#commons-lang;2.6 in sbt-chain[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->default(compile)][0m
+[0m[[0minfo[0m] [0mResolving org.json#json;20090211 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: org.json#json;20090211 {compile=[default(compile)]}[0m
+[0m[[0minfo[0m] [0mResolving org.json#json;20090211 ...[0m
+[0m[[0mdebug[0m] [0msbt-chain-delegate: Checking cache for: dependency: org.json#json;20090211 {compile=[default(compile)]}[0m
+[0m[[0mdebug[0m] [0m		tried C:\Users\parikshitt23\.ivy2\local\org.json\json\20090211\ivys\ivy.xml[0m
+[0m[[0mdebug[0m] [0m	local: no ivy file found for org.json#json;20090211[0m
+[0m[[0mdebug[0m] [0m		tried C:\Users\parikshitt23\.activator\repository\org.json\json\20090211\ivys\ivy.xml[0m
+[0m[[0mdebug[0m] [0m	activator-launcher-local: no ivy file found for org.json#json;20090211[0m
+[0m[[0mdebug[0m] [0m		tried C:\Users\parikshitt23\Downloads\typesafe-activator-1.3.6\activator-dist-1.3.6\repository\org.json\json\20090211\ivys\ivy.xml[0m
+[0m[[0mdebug[0m] [0m	activator-local: found md file for org.json#json;20090211[0m
+[0m[[0mdebug[0m] [0m		=> C:\Users\parikshitt23\Downloads\typesafe-activator-1.3.6\activator-dist-1.3.6\repository\org.json\json\20090211\ivys\ivy.xml (20090211)[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.json#json;20090211!ivy.xml(ivy.original)[0m
+[0m[[0mdebug[0m] [0m	found org.json#json;20090211 in activator-local[0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->master][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'runtime'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [compile][0m
@@ -538,8 +563,8 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->master(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)][0m
@@ -582,7 +607,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->io.spray#spray-routing_2.11;1.3.2 [compile->master][0m
@@ -666,6 +691,14 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->master][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [test][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [runtime][0m
@@ -806,8 +839,8 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->master(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)][0m
@@ -850,7 +883,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->io.spray#spray-routing_2.11;1.3.2 [compile->master][0m
@@ -934,6 +967,14 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->master][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->com.typesafe.akka#akka-testkit_2.11;2.3.9 [test->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving com.typesafe.akka#akka-testkit_2.11;2.3.9 ...[0m
 [0m[[0mdebug[0m] [0msbt-chain: Checking cache for: dependency: com.typesafe.akka#akka-testkit_2.11;2.3.9 {test=[default(compile)]}[0m
@@ -1438,8 +1479,8 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->master(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)][0m
@@ -1482,7 +1523,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->io.spray#spray-routing_2.11;1.3.2 [compile->master][0m
@@ -1566,6 +1607,14 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->master][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [optional][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [provided][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'runtime-internal'[0m
@@ -1708,8 +1757,8 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->master(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)][0m
@@ -1752,7 +1801,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->io.spray#spray-routing_2.11;1.3.2 [compile->master][0m
@@ -1836,6 +1885,14 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->master][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [optional][0m
 [0m[[0mdebug[0m] [0mresolving dependencies for configuration 'test-internal'[0m
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#facebookclient_2.11;1.0 [test-internal][0m
@@ -1978,8 +2035,8 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->compile(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->compile(*)][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [compile->master(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->compile(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [compile->master(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->org.scala-lang#scala-library;2.11.2 [runtime->runtime(*)][0m
@@ -2022,7 +2079,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->io.spray#spray-util_2.11;1.3.2 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies io.spray#spray-routing_2.11;1.3.2->com.chuusai#shapeless_2.11;1.2.4 [runtime->compile][0m
-[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0-M3 [runtime->runtime(*)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.0 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->runtime(*)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies com.chuusai#shapeless_2.11;1.2.4->org.scala-lang#scala-library;2.11.7 [runtime->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->io.spray#spray-routing_2.11;1.3.2 [compile->master][0m
@@ -2106,6 +2163,14 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->compile][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-codec#commons-codec;1.10 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->commons-lang#commons-lang;2.6 [compile->master][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->default(compile)][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->runtime][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->compile][0m
+[0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->org.json#json;20090211 [compile->master][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->com.typesafe.akka#akka-testkit_2.11;2.3.9 [test->default(compile)][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->com.typesafe.akka#akka-testkit_2.11;2.3.9 [test->runtime][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#facebookclient_2.11;1.0->com.typesafe.akka#akka-testkit_2.11;2.3.9 [test->compile][0m
@@ -2466,6 +2531,9 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] io.spray#spray-json_2.11;1.3.1!spray-json_2.11.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe#config;1.2.1!config.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-codec#commons-codec;1.10!commons-codec.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] commons-lang#commons-lang;2.6!commons-lang.jar[0m
+[0m[[0mdebug[0m] [0m		tried C:\Users\parikshitt23\Downloads\typesafe-activator-1.3.6\activator-dist-1.3.6\repository\org.json\json\20090211\jars\json.jar[0m
+[0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.json#json;20090211!json.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] ch.qos.logback#logback-core;1.1.2!logback-core.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] com.typesafe.scala-logging#scala-logging-api_2.11;2.1.2!scala-logging-api_2.11.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#scala-reflect;2.11.0!scala-reflect.jar[0m
@@ -2508,19 +2576,19 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang.modules#scala-xml_2.11;1.0.4!scala-xml_2.11.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang.modules#scala-parser-combinators_2.11;1.0.4!scala-parser-combinators_2.11.jar(bundle)[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] jline#jline;2.12.1!jline.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 2172ms :: artifacts dl 41ms[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 compile produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-compile.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 runtime produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-runtime.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 test produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-test.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 provided produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-provided.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 optional produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-optional.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 compile-internal produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-compile-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 runtime-internal produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-runtime-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 test-internal produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-test-internal.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 plugin produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-plugin.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 sources produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-sources.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 docs produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-docs.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 pom produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-pom.xml[0m
-[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 scala-tool produced in /home/parikshit/Documents/Facebook/FacebookClient/target/resolution-cache/reports/default-facebookclient_2.11-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (2172ms resolve - 41ms download)[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 6874ms :: artifacts dl 1445ms[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 compile produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-compile.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 runtime produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-runtime.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 test produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-test.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 provided produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-provided.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 optional produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-optional.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 compile-internal produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-compile-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 runtime-internal produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-runtime-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 test-internal produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-test-internal.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 plugin produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-plugin.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 sources produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-sources.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 docs produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-docs.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 pom produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-pom.xml[0m
+[0m[[0mdebug[0m] [0m	report for default#facebookclient_2.11;1.0 scala-tool produced in C:\Users\parikshitt23\Desktop\79218564_91507670_project4_part2\Facebook\FacebookClient\target\resolution-cache\reports\default-facebookclient_2.11-scala-tool.xml[0m
+[0m[[0mdebug[0m] [0m	resolve done (6874ms resolve - 1445ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

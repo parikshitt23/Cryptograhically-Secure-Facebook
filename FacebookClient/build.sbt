@@ -33,5 +33,9 @@ libraryDependencies ++=
 
 libraryDependencies += "commons-codec" % "commons-codec" % "1.10"
 
+libraryDependencies += "commons-lang" % "commons-lang" % "2.6"
+
+libraryDependencies += "org.json" % "json" % "20090211"
+
 
 

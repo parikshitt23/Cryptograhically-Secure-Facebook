@@ -25,15 +25,23 @@ import org.apache.commons.codec.binary
 import org.apache.commons.codec.binary.Base64
 import java.io.FileOutputStream
 import akka.util.Timeout
+import java.security.KeyPairGenerator;
+import java.security.KeyPair;
+import java.security.PublicKey;
+import java.security.PrivateKey;
+import javax.crypto.Cipher;
+import java.security.MessageDigest
+import org.apache.commons.lang.SerializationUtils
 //import spray.json.DefaultJsonProtocol._
 
-case class User(userId: Int, name: String, gender: String)
-case class Page(pageId: Int, pageName: String, likes: Int)
+case class User(userId: Int, name: String, gender: String, userPublicKey: String)
+case class Page(pageId: Int, pageName: String, likes: Int, pagePublicKey: String)
 case class UserPost(postId: Int, admin_creator: Int, post: String)
+case class UserEncryptedPost(postId: Int, admin_creator: Int, post: String, key: String)
 case class Post(postId: Int, admin_creator: Int, post: String)
 case class FriendList(userId: Int, friendList: List[User])
 case class FriendRequestsList(userId: Int, requestsList: List[User])
-case class userImageJson(userId: String, pictureId: String, Image: String)
+case class userImageJson(userId: String, pictureId: String, Image: String, key : String)
 case class pageImageJson(pageId: String, pictureId: String, Image: String)
 case class statistics(pagePost_Count: Int, userPost_Count: Int, Total_Number_of_Posts: Int, picture_Post_count: Int, Number_of_friendRequests_sent: Int)
 case class setPageList(userList: scala.collection.mutable.Map[Int, Page])
@@ -41,8 +49,9 @@ case class setUserList(userListFrom: scala.collection.mutable.Map[Int, User])
 case class updatePageLikeList(pageId: Int, userId: Int, pageList: scala.collection.mutable.Map[Int, Page], pageLikeList: scala.collection.mutable.Map[Int, List[Int]])
 //*********************************************************************************************************************
 case class ObjectForLike(pageList: scala.collection.mutable.Map[Int, Page], pageLikeList: scala.collection.mutable.Map[Int, List[Int]])
-case class pagePost(pageId: Int, post: String, pagePostList: scala.collection.mutable.Map[Int, List[Post]])
-case class userPostMethod(userId: Int, fromUser: Int, post: String, friendList: scala.collection.mutable.Map[Int, List[User]], userPostList: scala.collection.mutable.Map[Int, List[UserPost]])
+case class pagePost(pageId: Int, postId: Int, post: String, pagePostList: scala.collection.mutable.Map[Int, List[Post]])
+case class userPostMethod(userId: Int, fromUser: Int, postId: Int, post: String, friendList: scala.collection.mutable.Map[Int, List[User]], userPostList: scala.collection.mutable.Map[Int, List[UserPost]])
+case class userEncryptedPostMethod(userId: Int, fromUser: Int, postId: Int, post: String, key: String, friendList: scala.collection.mutable.Map[Int, List[User]], userEncryptedPostList: scala.collection.mutable.Map[Int, List[UserEncryptedPost]])
 case class updateUnlike(pageId: Int, userId: Int, pageList: scala.collection.mutable.Map[Int, Page], pageLikeList: scala.collection.mutable.Map[Int, List[Int]])
 case class deletePagePost(pageId: Int, postId: Int, pagePostList: scala.collection.mutable.Map[Int, List[Post]])
 case class deleteUserPost(userId: Int, fromUser: Int, postId: Int, userPostList: scala.collection.mutable.Map[Int, List[UserPost]])
@@ -51,22 +60,26 @@ case class setPagePicture(imageJson: pageImageJson, postPagePictureList: scala.c
 case class friendRequest(userId: Int, friendId: Int, friendRequestsList: scala.collection.mutable.Map[Int, List[User]], userList: scala.collection.mutable.Map[Int, User])
 case class approveDeclineRequest(userId: Int, friendId: Int, decision: Boolean, friendList: scala.collection.mutable.Map[Int, List[User]], friendRequestsList: scala.collection.mutable.Map[Int, List[User]], userList: scala.collection.mutable.Map[Int, User])
 case class ObjectForFriend(friendList: scala.collection.mutable.Map[Int, List[User]], friendRequestsList: scala.collection.mutable.Map[Int, List[User]], userList: scala.collection.mutable.Map[Int, User])
-case class pageLikeUnlikeJson(pageId : Int, userId : Int)
-case class pagePostJson(pageId : Int, post : String)
-case class deletePostJson(pageId : Int, postId : Int)
-case class friendRequestJson(userId : Int, friendId : Int)
-case class approveDeclineRequestJson(userId : Int, friendId : Int, decision : Boolean)
-case class userPostJson(userId : Int, fromUser : Int, post : String)
-case class deleteUserPostJson(userId : Int, fromUser : Int, postId : Int)
+case class pageLikeUnlikeJson(pageId: Int, userId: Int)
+case class pagePostJson(pageId: Int, postId: Int, post: String)
+case class deletePostJson(pageId: Int, postId: Int)
+case class friendRequestJson(userId: Int, friendId: Int)
+case class approveDeclineRequestJson(userId: Int, friendId: Int, decision: Boolean)
+case class userPostJson(userId: Int, fromUser: Int, postId: Int, post: String)
+case class userEncryptedPostJson(userId: Int, fromUser: Int, postId: Int, post: String, key: String)
+case class deleteUserPostJson(userId: Int, fromUser: Int, postId: Int)
 
 object deleteUserPostJson extends DefaultJsonProtocol {
   implicit val userFormat = jsonFormat3(deleteUserPostJson.apply)
 }
 
-object userPostJson extends DefaultJsonProtocol {
-  implicit val userFormat = jsonFormat3(userPostJson.apply)
+object userEncryptedPostJson extends DefaultJsonProtocol {
+  implicit val userFormat = jsonFormat5(userEncryptedPostJson.apply)
 }
 
+object userPostJson extends DefaultJsonProtocol {
+  implicit val userFormat = jsonFormat4(userPostJson.apply)
+}
 object approveDeclineRequestJson extends DefaultJsonProtocol {
   implicit val userFormat = jsonFormat3(approveDeclineRequestJson.apply)
 }
@@ -80,11 +93,11 @@ object deletePostJson extends DefaultJsonProtocol {
 }
 
 object pagePostJson extends DefaultJsonProtocol {
-  implicit val userFormat = jsonFormat2(pagePostJson.apply)
+  implicit val userFormat = jsonFormat3(pagePostJson.apply)
 }
 
 object userImageJson extends DefaultJsonProtocol {
-  implicit val userFormat = jsonFormat3(userImageJson.apply)
+  implicit val userFormat = jsonFormat4(userImageJson.apply)
 }
 
 object pageLikeUnlikeJson extends DefaultJsonProtocol {
@@ -96,13 +109,16 @@ object pageImageJson extends DefaultJsonProtocol {
 }
 
 object User extends DefaultJsonProtocol {
-  implicit val userFormat = jsonFormat3(User.apply)
+  implicit val userFormat = jsonFormat4(User.apply)
 }
 object Page extends DefaultJsonProtocol {
-  implicit var pageFormat = jsonFormat3(Page.apply)
+  implicit var pageFormat = jsonFormat4(Page.apply)
 }
 object UserPost extends DefaultJsonProtocol {
   implicit var pagePostFormat = jsonFormat3(UserPost.apply)
+}
+object UserEncryptedPost extends DefaultJsonProtocol {
+  implicit var pagePostFormat = jsonFormat4(UserEncryptedPost.apply)
 }
 object Post extends DefaultJsonProtocol {
   implicit var pageFormat = jsonFormat3(Post.apply)
@@ -117,21 +133,24 @@ object statistics extends DefaultJsonProtocol {
   implicit var pageFormat = jsonFormat5(statistics.apply)
 }
 
-
 class ServerActor extends HttpServiceActor {
   override def actorRefFactory = context
   implicit def executionContext = actorRefFactory.dispatcher
 
   var userList = scala.collection.mutable.Map[Int, User]()
   var pageList = scala.collection.mutable.Map[Int, Page]()
+  var userPublicKeyList = scala.collection.mutable.Map[Int, PublicKey]()
+  var pagePublicKeyList = scala.collection.mutable.Map[Int, PublicKey]()
   var pageLikeList = scala.collection.mutable.Map[Int, List[Int]]()
   // var pagePostList1 = scala.collection.mutable.Map[Int, PagePost]()
   var pagePostList = scala.collection.mutable.Map[Int, List[Post]]()
   var userPostList = scala.collection.mutable.Map[Int, List[UserPost]]()
+  var userEncryptedPostList = scala.collection.mutable.Map[Int, List[UserEncryptedPost]]()
   var friendList = scala.collection.mutable.Map[Int, List[User]]()
   var friendRequestsList = scala.collection.mutable.Map[Int, List[User]]()
   var postUserPictureList = scala.collection.mutable.Map[Int, List[userImageJson]]()
   var postPagePictureList = scala.collection.mutable.Map[Int, List[pageImageJson]]()
+  var tokens = ArrayBuffer[String]()
   var pagePostCounter = 0
   var userPostCounter = 0
   var totalPostCounter = 0
@@ -145,9 +164,16 @@ class ServerActor extends HttpServiceActor {
     respondWithMediaType(MediaTypes.`application/json`) {
       path("user" / IntNumber) { (userId) =>
         get {
-          userList.get(userId) match {
-            case Some(userRoute) => complete(userRoute)
-            case None            => complete(NotFound -> s"No user with id $userId was found!")
+          headerValueByName("token") { token =>
+            if (tokens.contains(token)) {
+              userList.get(userId) match {
+                case Some(userRoute) => complete(userRoute)
+                case None            => complete(NotFound -> s"No user with id $userId was found!")
+              }
+            } else {
+              println("NOT LOGGED IN!!!!!")
+              complete(NotFound -> s"You are not logged in!!!")
+            }
           }
         }
       }
@@ -156,10 +182,12 @@ class ServerActor extends HttpServiceActor {
         path("registerUser") {
           entity(as[User]) { (userRegisterJson) =>
           //parameters("userId".as[Int], "name".as[String], "gender".as[String]) { (userId, name, gender) =>
-            userList += userRegisterJson.userId.toInt -> User(userRegisterJson.userId, userRegisterJson.name, userRegisterJson.gender)
-            //worker ! setUserList(userList)
+            userList += userRegisterJson.userId.toInt -> User(userRegisterJson.userId, userRegisterJson.name, userRegisterJson.gender, userRegisterJson.userPublicKey)
+            var decodedBase64String = Base64.decodeBase64(userRegisterJson.userPublicKey.getBytes())
+            var userPublicKey : java.security.PublicKey =  SerializationUtils.deserialize(decodedBase64String).asInstanceOf[java.security.PublicKey]
+            userPublicKeyList += userRegisterJson.userId.toInt  -> userPublicKey
             complete {
-              "User Created - " + userRegisterJson.name
+              "OK"
             }
           }
         }
@@ -167,165 +195,277 @@ class ServerActor extends HttpServiceActor {
         path("registerPage") {
           entity(as[Page]) { (pageRegisterJson) =>
           //parameters("pageId".as[Int], "pageName".as[String]) { (pageId, pageName) =>
-            pageList += pageRegisterJson.pageId -> Page(pageRegisterJson.pageId, pageRegisterJson.pageName, pageRegisterJson.likes)
-            //worker ! setPageList(pageList)
+            pageList += pageRegisterJson.pageId -> Page(pageRegisterJson.pageId, pageRegisterJson.pageName, pageRegisterJson.likes, pageRegisterJson.pagePublicKey)
+            var decodedBase64String = Base64.decodeBase64(pageRegisterJson.pagePublicKey.getBytes())
+            var pagePublicKey : java.security.PublicKey =  SerializationUtils.deserialize(decodedBase64String).asInstanceOf[java.security.PublicKey]
+            pagePublicKeyList += pageRegisterJson.pageId.toInt  -> pagePublicKey
             complete {
-              "Page Created - " + pageRegisterJson.pageName
+              "OK"
             }
           }
+          }~ post {
+        path("loginUser") {
+          entity(as[User]) { (userRegisterJson) =>
+            var randomToken = Random.alphanumeric.take(10).mkString
+             var decodedBase64String = Base64.decodeBase64(userRegisterJson.userPublicKey.getBytes())
+            var userPublicKey : java.security.PublicKey =  SerializationUtils.deserialize(decodedBase64String).asInstanceOf[java.security.PublicKey]
+            var token = encryptRSA(randomToken, userPublicKey)
+            tokens += randomToken
+            //println("Random token "+randomToken)
+            complete {
+              token
+            }
+          }
+        }
+        } ~ post {
+        path("loginVerified") {
+              headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                println("New User Logged In!!!!")
+                complete {
+                  "You are logged in"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
+            }
+          
+        }
+        }~ post {
+        path("loginPage") {
+          entity(as[Page]) { (pageRegisterJson) =>
+            var randomToken = Random.alphanumeric.take(10).mkString
+             var decodedBase64String = Base64.decodeBase64(pageRegisterJson.pagePublicKey.getBytes())
+            var pagePublicKey : java.security.PublicKey =  SerializationUtils.deserialize(decodedBase64String).asInstanceOf[java.security.PublicKey]
+            var token = encryptRSA(randomToken, pagePublicKey)
+            tokens += randomToken
+            //println("Random token "+randomToken)
+            //println(randomToken.getBytes())
+            complete {
+              token
+            }
+          }
+        }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("page" / IntNumber) { (pageId) =>
           get {
-            pageList.get(pageId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No page with id $pageId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                pageList.get(pageId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No page with id $pageId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
           }
         }
       } ~ post {
         path("likePage") {
           entity(as[pageLikeUnlikeJson]) { (pageLikeJson) =>
-          //parameters("pageId".as[Int], "userId".as[Int]) { (pageId, userId) =>
-            //*********************************************************************************************************************
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[ObjectForLike] = ask(worker, updatePageLikeList(pageLikeJson.pageId, pageLikeJson.userId, pageList, pageLikeList)).mapTo[ObjectForLike]
-            future onSuccess {
-              case result => {
-                pageList = result.pageList
-                pageLikeList = result.pageLikeList
-              }
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[ObjectForLike] = ask(worker, updatePageLikeList(pageLikeJson.pageId, pageLikeJson.userId, pageList, pageLikeList)).mapTo[ObjectForLike]
+                future onSuccess {
+                  case result => {
+                    pageList = result.pageList
+                    pageLikeList = result.pageLikeList
+                  }
 
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
-            complete {
-              "OK"
-            }
+
           }
         }
       } ~ post {
         path("unlikePage") {
           entity(as[pageLikeUnlikeJson]) { (pageUnlikeJson) =>
-         // parameters("pageId".as[Int], "userId".as[Int]) { (pageId, userId) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[ObjectForLike] = ask(worker, updateUnlike(pageUnlikeJson.pageId, pageUnlikeJson.userId, pageList, pageLikeList)).mapTo[ObjectForLike]
-            future onSuccess {
-              case result => {
-                pageList = result.pageList
-                pageLikeList = result.pageLikeList
+            // parameters("pageId".as[Int], "userId".as[Int]) { (pageId, userId) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[ObjectForLike] = ask(worker, updateUnlike(pageUnlikeJson.pageId, pageUnlikeJson.userId, pageList, pageLikeList)).mapTo[ObjectForLike]
+                future onSuccess {
+                  case result => {
+                    pageList = result.pageList
+                    pageLikeList = result.pageLikeList
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
             }
-            complete {
-              "OK"
-            }
+
           }
         }
       } ~ post {
         path("pagePost") {
-          
+
           entity(as[pagePostJson]) { (pagePostJson) =>
-         // parameters("pageId".as[Int], "post".as[String]) { (pageId, post) =>
+            // parameters("pageId".as[Int], "post".as[String]) { (pageId, post) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[Post]]] = ask(worker, pagePost(pagePostJson.pageId, pagePostJson.postId, pagePostJson.post, pagePostList)).mapTo[scala.collection.mutable.Map[Int, List[Post]]]
+                future onSuccess {
+                  case result => {
+                    pagePostCounter = pagePostCounter + 1
+                    pagePostList = result
+                  }
 
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[Post]]] = ask(worker, pagePost(pagePostJson.pageId, pagePostJson.post, pagePostList)).mapTo[scala.collection.mutable.Map[Int, List[Post]]]
-            future onSuccess {
-              case result => {
-                pagePostCounter = pagePostCounter + 1
-                pagePostList = result
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-
             }
 
-            complete {
-              "OK"
-            }
           }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("page" / IntNumber / "feed") { (pageId) =>
           get {
-            pagePostList.get(pageId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No posts for page id $pageId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                pagePostList.get(pageId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No posts for page id $pageId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
           }
         }
       } ~ post {
         path("deletePost") {
           entity(as[deletePostJson]) { (deletePostJson) =>
-          //parameters("pageId".as[Int], "postId".as[Int]) { (pageId, postId) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[Post]]] = ask(worker, deletePagePost(deletePostJson.pageId, deletePostJson.postId, pagePostList)).mapTo[scala.collection.mutable.Map[Int, List[Post]]]
-            future onSuccess {
-              case result => {
-                userPostCounter = userPostCounter + 1
-                totalPostCounter = totalPostCounter + 1
-                //println(userPostCounter)
-                pagePostList = result
+            //parameters("pageId".as[Int], "postId".as[Int]) { (pageId, postId) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[Post]]] = ask(worker, deletePagePost(deletePostJson.pageId, deletePostJson.postId, pagePostList)).mapTo[scala.collection.mutable.Map[Int, List[Post]]]
+                future onSuccess {
+                  case result => {
+                    userPostCounter = userPostCounter + 1
+                    totalPostCounter = totalPostCounter + 1
+                    //println(userPostCounter)
+                    pagePostList = result
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-
-            }
-
-            complete {
-              "OK"
             }
           }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("user" / IntNumber / "friendsList") { (userId) =>
           get {
-            friendList.get(userId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No friends for user id $userId was founds!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                friendList.get(userId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No friends for user id $userId was founds!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
           }
 
         } ~ respondWithMediaType(MediaTypes.`application/json`) {
           path("user" / IntNumber / "friendRequestsList") { (userId) =>
             get {
-              friendRequestsList.get(userId) match {
-                case Some(userRoute) => complete(userRoute)
-                case None            => complete(NotFound -> s"No friends REQUESTS for user id $userId was founds!")
+              headerValueByName("token") { token =>
+                if (tokens.contains(token)) {
+                  friendRequestsList.get(userId) match {
+                    case Some(userRoute) => complete(userRoute)
+                    case None            => complete(NotFound -> s"No friends REQUESTS for user id $userId was founds!")
+                  }
+                } else {
+                  println("NOT LOGGED IN!!!!!")
+                  complete(NotFound -> s"You are not logged in!!!")
+                }
               }
             }
-
           }
         }
       } ~ post {
         path("friendRequest") {
-           entity(as[friendRequestJson]) { (friendRequestJson) =>
-         // parameters("userId".as[Int], "friendId".as[Int]) { (userId, friendId) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[User]]] = ask(worker, friendRequest(friendRequestJson.userId, friendRequestJson.friendId, friendRequestsList, userList)).mapTo[scala.collection.mutable.Map[Int, List[User]]]
-            future onSuccess {
-              case result => {
-                friendRequestSent = friendRequestSent + 1
-                friendRequestsList = result
+          entity(as[friendRequestJson]) { (friendRequestJson) =>
+            // parameters("userId".as[Int], "friendId".as[Int]) { (userId, friendId) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[User]]] = ask(worker, friendRequest(friendRequestJson.userId, friendRequestJson.friendId, friendRequestsList, userList)).mapTo[scala.collection.mutable.Map[Int, List[User]]]
+                future onSuccess {
+                  case result => {
+                    friendRequestSent = friendRequestSent + 1
+                    friendRequestsList = result
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-
-            }
-            complete {
-              "OK"
             }
 
           }
         }
       } ~ post {
-        
+
         path("approveDeclineRequest") {
           entity(as[approveDeclineRequestJson]) { (approveDeclineRequestJson) =>
-         // parameters("userId".as[Int], "friendId".as[Int], "decision".as[Boolean]) { (userId, friendId, decision) =>
-
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[ObjectForFriend] = ask(worker, approveDeclineRequest(approveDeclineRequestJson.userId, approveDeclineRequestJson.friendId, approveDeclineRequestJson.decision, friendList, friendRequestsList, userList)).mapTo[ObjectForFriend]
-            future onSuccess {
-              case result => {
-                friendRequestsList = result.friendRequestsList
-                friendList = result.friendList
-                userList = result.userList
+            // parameters("userId".as[Int], "friendId".as[Int], "decision".as[Boolean]) { (userId, friendId, decision) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[ObjectForFriend] = ask(worker, approveDeclineRequest(approveDeclineRequestJson.userId, approveDeclineRequestJson.friendId, approveDeclineRequestJson.decision, friendList, friendRequestsList, userList)).mapTo[ObjectForFriend]
+                future onSuccess {
+                  case result => {
+                    friendRequestsList = result.friendRequestsList
+                    friendList = result.friendList
+                    userList = result.userList
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-            }
-            complete {
-              "OK"
             }
 
           }
@@ -333,120 +473,252 @@ class ServerActor extends HttpServiceActor {
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("user" / IntNumber / "feed") { (userId) =>
           get {
-            userPostList.get(userId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No posts for user id $userId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                userPostList.get(userId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No posts for user id $userId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
+          }
+        }
+      } ~ respondWithMediaType(MediaTypes.`application/json`) {
+        path("getPublicKey" / IntNumber) { (userId) =>
+          get {
+             headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                 userList.get(userId) match {
+              case Some(userRoute) => complete(userRoute)
+              case None            => complete(NotFound -> s"No EncPosts for user id $userId was found!")
+            }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
+            }
+           
+          }
+        }
+      } ~ respondWithMediaType(MediaTypes.`application/json`) {
+        path("user" / IntNumber / "encryptedFeed") { (userId) =>
+          get {
+             headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+             userEncryptedPostList.get(userId) match {
+              case Some(userRoute) => complete(userRoute)
+              case None            => complete(NotFound -> s"No EncPosts for user id $userId was found!")
+            }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
+            }
+            
           }
         }
       } ~ post {
         path("userPost") {
-           entity(as[userPostJson]) { (userPostJson) =>
-          //parameters("userId".as[Int], "fromUser".as[Int], "post".as[String]) { (userId, fromUser, post) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[UserPost]]] = ask(worker, userPostMethod(userPostJson.userId, userPostJson.fromUser, userPostJson.post, friendList, userPostList)).mapTo[scala.collection.mutable.Map[Int, List[UserPost]]]
-            future onSuccess {
-              case result => {
-                userPostCounter = userPostCounter + 1
-                userPostList = result
+          entity(as[userPostJson]) { (userPostJson) =>
+            //parameters("userId".as[Int], "fromUser".as[Int], "post".as[String]) { (userId, fromUser, post) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[UserPost]]] = ask(worker, userPostMethod(userPostJson.userId, userPostJson.fromUser, userPostJson.postId, userPostJson.post, friendList, userPostList)).mapTo[scala.collection.mutable.Map[Int, List[UserPost]]]
+                future onSuccess {
+                  case result => {
+                    userPostCounter = userPostCounter + 1
+                    userPostList = result
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-
             }
 
+          }
+        }
+      } ~ post {
+        path("userEncryptedPost") {
+          entity(as[userEncryptedPostJson]) { (userEncryptedPostJson) =>
+             headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+            var future: Future[scala.collection.mutable.Map[Int, List[UserEncryptedPost]]] = ask(worker, userEncryptedPostMethod(userEncryptedPostJson.userId, userEncryptedPostJson.fromUser, userEncryptedPostJson.postId, userEncryptedPostJson.post, userEncryptedPostJson.key, friendList, userEncryptedPostList)).mapTo[scala.collection.mutable.Map[Int, List[UserEncryptedPost]]]
+            future onSuccess {
+              case result => {
+                //userPostCounter = userPostCounter + 1
+                userEncryptedPostList = result
+              }
+            }
             complete {
               "OK"
             }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
+            }
+            
+
           }
         }
       } ~ post {
         path("deletePost") {
-           entity(as[deleteUserPostJson]) { (deleteUserPostJson) =>
-          //parameters("userId".as[Int], "fromUser".as[Int], "postId".as[Int]) { (userId, fromUser, postId) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[UserPost]]] = ask(worker, deleteUserPost(deleteUserPostJson.userId, deleteUserPostJson.fromUser, deleteUserPostJson.postId, userPostList)).mapTo[scala.collection.mutable.Map[Int, List[UserPost]]]
-            future onSuccess {
-              case result => {
-                userPostList = result
+          entity(as[deleteUserPostJson]) { (deleteUserPostJson) =>
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[UserPost]]] = ask(worker, deleteUserPost(deleteUserPostJson.userId, deleteUserPostJson.fromUser, deleteUserPostJson.postId, userPostList)).mapTo[scala.collection.mutable.Map[Int, List[UserPost]]]
+                future onSuccess {
+                  case result => {
+                    userPostList = result
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-
             }
-
-            complete {
-              "OK"
-            }
+            //parameters("userId".as[Int], "fromUser".as[Int], "postId".as[Int]) { (userId, fromUser, postId) =>
           }
         }
       } ~ post {
         path("userAlbum") {
           entity(as[userImageJson]) { (pictureJson) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[userImageJson]]] = ask(worker, setUserPicture(pictureJson, postUserPictureList)).mapTo[scala.collection.mutable.Map[Int, List[userImageJson]]]
-            future onSuccess {
-              case result => {
-                picturePostCount = picturePostCount + 1
-                postUserPictureList = result
-
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                 implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[userImageJson]]] = ask(worker, setUserPicture(pictureJson, postUserPictureList)).mapTo[scala.collection.mutable.Map[Int, List[userImageJson]]]
+                future onSuccess {
+                  case result => {
+                    picturePostCount = picturePostCount + 1
+                    postUserPictureList = result
+                    //println(postUserPictureList)
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
-
             }
-
-            complete {
-              "OK"
-            }
+               
           }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("user" / IntNumber / "album") { (userId) =>
           get {
-            postUserPictureList.get(userId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No pictures for page id $userId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                postUserPictureList.get(userId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No pictures for user id $userId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
           }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("user" / IntNumber / "picture" / IntNumber) { (userId, pictureId) =>
           get {
-
-            getUserPictureIndex(userId, pictureId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No pictures for page id $userId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                getUserPictureIndex(userId, pictureId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No pictures for user id $userId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
           }
         }
       } ~ post {
         path("pageAlbum") {
           entity(as[pageImageJson]) { (pictureJson) =>
-            implicit val timeout = Timeout(5 seconds)
-            var future: Future[scala.collection.mutable.Map[Int, List[pageImageJson]]] = ask(worker, setPagePicture(pictureJson, postPagePictureList)).mapTo[scala.collection.mutable.Map[Int, List[pageImageJson]]]
-            future onSuccess {
-              case result => {
-                picturePostCount = picturePostCount + 1
-                postPagePictureList = result
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                implicit val timeout = Timeout(5 seconds)
+                var future: Future[scala.collection.mutable.Map[Int, List[pageImageJson]]] = ask(worker, setPagePicture(pictureJson, postPagePictureList)).mapTo[scala.collection.mutable.Map[Int, List[pageImageJson]]]
+                future onSuccess {
+                  case result => {
+                    picturePostCount = picturePostCount + 1
+                    postPagePictureList = result
+                  }
+                }
+                complete {
+                  "OK"
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
               }
             }
-            complete {
-              "OK"
-            }
+
           }
         }
-      } ~ respondWithMediaType(MediaTypes.`application/json`) {
+      } ~ post {
+        path("logout") {
+            headerValueByName("token") { token =>
+              tokens -= token
+               complete {
+                  "You have been logged out"
+                }
+                }
+               
+             } 
+      }~ respondWithMediaType(MediaTypes.`application/json`) {
         path("page" / IntNumber / "album") { (pageId) =>
           get {
-            postPagePictureList.get(pageId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No pictures for page id $pageId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                postPagePictureList.get(pageId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No pictures for page id $pageId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
           }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
         path("page" / IntNumber / "picture" / IntNumber) { (pageId, pictureId) =>
           get {
-
-            getPagePictureIndex(pageId, pictureId) match {
-              case Some(userRoute) => complete(userRoute)
-              case None            => complete(NotFound -> s"No pictures for page id $pageId was found!")
+            headerValueByName("token") { token =>
+              if (tokens.contains(token)) {
+                getPagePictureIndex(pageId, pictureId) match {
+                  case Some(userRoute) => complete(userRoute)
+                  case None            => complete(NotFound -> s"No pictures for page id $pageId was found!")
+                }
+              } else {
+                println("NOT LOGGED IN!!!!!")
+                complete(NotFound -> s"You are not logged in!!!")
+              }
             }
+
           }
         }
       } ~ respondWithMediaType(MediaTypes.`application/json`) {
@@ -492,7 +764,16 @@ class ServerActor extends HttpServiceActor {
     runRoute(routes)
 
   }
-
+  
+  def encryptRSA(randomToken: String, key: PublicKey): String = {
+  
+   var cipher = Cipher.getInstance("RSA");
+            // ENCRYPT using the PUBLIC key
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            var encryptedBytes = cipher.doFinal(randomToken.getBytes("ISO-8859-1"));
+   
+    return Base64.encodeBase64String(encryptedBytes)
+  }
 }
 
 class ServerWorker extends Actor {
@@ -506,12 +787,12 @@ class ServerWorker extends Actor {
       if (!pageLikeList.contains(pageId)) {
         pageLikeList += pageId -> List(userId)
         // println(pageList.size)
-        pageList(pageId) = Page(pageId, pageList(pageId).pageName, pageList(pageId).likes + 1)
+        pageList(pageId) = Page(pageId, pageList(pageId).pageName, pageList(pageId).likes + 1, pageList(pageId).pagePublicKey)
         //pageLikeList foreach {case (key, value) => println (key + "---->" + value.toList)}
       } else {
         if (!pageLikeList(pageId).contains(userId)) {
           pageLikeList(pageId) ::= userId
-          pageList(pageId) = Page(pageId, pageList(pageId).pageName, pageList(pageId).likes + 1)
+          pageList(pageId) = Page(pageId, pageList(pageId).pageName, pageList(pageId).likes + 1, pageList(pageId).pagePublicKey)
         }
 
       }
@@ -522,18 +803,18 @@ class ServerWorker extends Actor {
       if (pageLikeList.contains(pageId) && pageLikeList(pageId).contains(userId)) {
         var index = pageLikeList(pageId).indexOf(userId)
         pageLikeList(pageId) = pageLikeList(pageId).take(index) ++ pageLikeList(pageId).drop(index + 1)
-        pageList(pageId) = Page(pageId, pageList(pageId).pageName, pageList(pageId).likes - 1)
+        pageList(pageId) = Page(pageId, pageList(pageId).pageName, pageList(pageId).likes - 1, pageList(pageId).pagePublicKey)
         //pageLikeList foreach {case (key, value) => println (key + "-->" + value.toList)}
       }
       sender ! ObjectForLike(pageList, pageLikeList)
     }
 
-    case pagePost(pageId: Int, post: String, pagePostList: scala.collection.mutable.Map[Int, List[Post]]) => {
+    case pagePost(pageId: Int, postId: Int, post: String, pagePostList: scala.collection.mutable.Map[Int, List[Post]]) => {
 
       if (!pagePostList.contains(pageId)) {
-        pagePostList += pageId -> List(Post(100, pageId, post))
+        pagePostList += pageId -> List(Post(postId, pageId, post))
       } else {
-        pagePostList(pageId) ::= Post(pagePostList(pageId).size + 100, pageId, post)
+        pagePostList(pageId) ::= Post(postId, pageId, post)
 
       }
       sender ! pagePostList
@@ -553,7 +834,7 @@ class ServerWorker extends Actor {
 
     }
 
-    case userPostMethod(userId: Int, fromUser: Int, post: String, friendList: scala.collection.mutable.Map[Int, List[User]], userPostList: scala.collection.mutable.Map[Int, List[UserPost]]) => {
+    case userPostMethod(userId: Int, fromUser: Int, postId: Int, post: String, friendList: scala.collection.mutable.Map[Int, List[User]], userPostList: scala.collection.mutable.Map[Int, List[UserPost]]) => {
 
       var tempFriendList: List[User] = List()
       var isFriend = false
@@ -568,13 +849,26 @@ class ServerWorker extends Actor {
 
       if (userId == fromUser || isFriend) {
         if (!userPostList.contains(userId)) {
-          userPostList += userId -> List(UserPost(100, fromUser, post))
+          userPostList += userId -> List(UserPost(postId, fromUser, post))
         } else {
-          userPostList(userId) ::= UserPost(userPostList(userId).size + 100, fromUser, post)
+          userPostList(userId) ::= UserPost(postId, fromUser, post)
 
         }
       }
       sender ! userPostList
+
+    }
+    case userEncryptedPostMethod(userId: Int, fromUser: Int, postId: Int, post: String, key: String, friendList: scala.collection.mutable.Map[Int, List[User]], userEncryptedPostList: scala.collection.mutable.Map[Int, List[UserEncryptedPost]]) => {
+       //println("Inside userEncryptedPostMethod")
+      var tempFriendList: List[User] = List()
+      if (!userEncryptedPostList.contains(userId)) {
+        userEncryptedPostList += userId -> List(UserEncryptedPost(postId, fromUser, post, key))
+      } else {
+        userEncryptedPostList(userId) ::= UserEncryptedPost(postId, fromUser, post, key)
+
+      }
+      //println(userEncryptedPostList)
+      sender ! userEncryptedPostList
 
     }
 

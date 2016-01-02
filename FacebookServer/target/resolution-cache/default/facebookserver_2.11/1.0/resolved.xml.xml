@@ -4,7 +4,7 @@
 		module="facebookserver_2.11"
 		revision="1.0"
 		status="integration"
-		publication="20151212153957"
+		publication="20151217122536"
 	>
 		<description>
 		FacebookServer
@@ -46,5 +46,6 @@
 		<dependency org="com.typesafe" name="config" rev="1.2.1" conf="compile->default(compile)"/>
 		<dependency org="org.scalatest" name="scalatest_2.11" rev="2.2.1" conf="test->default(compile)"/>
 		<dependency org="commons-codec" name="commons-codec" rev="1.10" conf="compile->default(compile)"/>
+		<dependency org="commons-lang" name="commons-lang" rev="2.6" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>
